@@ -16,6 +16,12 @@
            class="btn btn-primary">
             🖨️ Print Report
         </a>
+
+        <a href="{{ route('reports.lowstock.pdf', request()->query()) }}"
+   class="btn btn-danger">
+    Export PDF
+</a>
+
     </div>
 
 

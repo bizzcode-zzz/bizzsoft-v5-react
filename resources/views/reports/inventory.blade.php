@@ -4,18 +4,34 @@
 <div class="container mt-4" style="color: black;">
     
     <!-- Spacing back button shortcut link pointer -->
-    <div class="mb-3">
-        <a href="{{ route('reports.index') }}" class="text-decoration-none" style="font-weight: bold;">← Back to Reports</a>
-    </div>
-    
-    <h2 class="mb-4">🗂️ Current Inventory Status Report</h2>
-    <div class="d-flex justify-content-between align-items-center mb-4">
-  <a href="{{ route('reports.inventory.print', request()->query()) }}" 
-           target="_blank" 
+<div class="mb-3">
+    <a href="{{ route('reports.index') }}"
+       class="text-decoration-none"
+       style="font-weight: bold;">
+        ← Back to Reports
+    </a>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2 class="mb-0">🗂️ Current Inventory Status Report</h2>
+
+    <div class="d-flex gap-2">
+
+        <a href="{{ route('reports.inventory.print', request()->query()) }}"
+           target="_blank"
            class="btn btn-primary">
             🖨️ Print Report
         </a>
+
+        <a href="{{ route('reports.inventory.pdf', request()->query()) }}"
+           class="btn btn-danger">
+            📄 Export PDF
+        </a>
+
     </div>
+
+</div>
     
 
 

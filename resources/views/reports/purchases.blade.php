@@ -12,16 +12,25 @@
         <div class="container mt-4" style="color: black;">
     
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0">📋 Purchase Report Ledger</h2>
- 
-        <a
-    href="{{ route('reports.purchases.print', request()->query()) }}"
-    target="_blank"
-    class="btn btn-primary">
 
-    🖨️ Print
+    <h2 class="mb-0">📋 Purchase Report Ledger</h2>
 
-</a>
+    <div>
+
+        <a href="{{ route('reports.purchases.print', request()->query()) }}"
+           target="_blank"
+           class="btn btn-primary">
+
+            🖨️ Print
+
+        </a>
+
+        <a href="{{ route('reports.purchases.pdf', request()->query()) }}"
+           class="btn btn-danger">
+
+            Export PDF
+
+        </a>
 
     </div>
 

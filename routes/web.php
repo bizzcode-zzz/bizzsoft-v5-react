@@ -66,12 +66,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/reports', [ReportsController::class, 'index'])
         ->name('reports.index');
 
+        
+
     Route::get('/reports/sales', [ReportsController::class, 'sales'])
         ->name('reports.sales');
 
-        // ✅ NEW SALES PRINT ROUTE
+// ✅ NEW SALES PRINT ROUTE
     Route::get('/reports/sales/print', [ReportsController::class, 'salesPrint'])
     ->name('reports.sales.print');
+// ✅ SALES PDF
+    Route::get('/reports/sales/pdf', [ReportsController::class, 'salesPdf'])
+    ->name('reports.sales.pdf');
+
+
+
 
     Route::get('/reports/purchases', [ReportsController::class, 'purchases'])
         ->name('reports.purchases');
@@ -79,6 +87,11 @@ Route::middleware('auth')->group(function () {
 // ✅ NEW PURCHASE PRINT ROUTE
         Route::get('/reports/purchases/print', [ReportsController::class, 'purchasesPrint'])
     ->name('reports.purchases.print');
+// ✅ PURCHASES PDF
+    Route::get('/reports/purchases/pdf', [ReportsController::class, 'purchasesPdf'])
+    ->name('reports.purchases.pdf');
+
+
 
     Route::get('/reports/inventory', [ReportsController::class, 'inventory'])
         ->name('reports.inventory');
@@ -86,6 +99,12 @@ Route::middleware('auth')->group(function () {
 // ✅ NEW INVENTORY PRINT ROUTE
         Route::get('/reports/inventory/print', [ReportsController::class, 'inventoryPrint'])
     ->name('reports.inventory.print');
+// ✅ INVENTORY PDF
+    Route::get('/reports/inventory/pdf', [ReportsController::class, 'inventoryPdf'])
+    ->name('reports.inventory.pdf');
+
+
+
 
     Route::get('/reports/low-stock', [ReportsController::class, 'lowstock'])
         ->name('reports.low_stock');
@@ -93,6 +112,11 @@ Route::middleware('auth')->group(function () {
 // ✅ NEW INVENTORY PRINT ROUTE
         Route::get('/reports/low-stock/print', [ReportsController::class, 'lowStockPrint'])
     ->name('reports.low-stock.print');
+// ✅ LOWSTOCK PDF
+    Route::get('/reports/lowstock/pdf', [ReportsController::class, 'lowstockPdf'])
+    ->name('reports.lowstock.pdf');
+
+
 
 
     Route::post('/logout', [AuthController::class, 'logout'])

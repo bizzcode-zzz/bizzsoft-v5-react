@@ -30,7 +30,17 @@
 
 </a>
 
+
+<a href="{{ route('reports.sales.pdf', request()->query()) }}"
+   class="btn btn-danger">
+
+    Export PDF
+
+</a>
+
     </div>
+
+    
 
 </div>
 

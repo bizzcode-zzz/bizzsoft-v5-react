@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Sales;
 use App\Models\Product;
-use App\Http\Requests\SalesRequest; // ⚠️ I-import ang request file
-use Illuminate\Support\Facades\DB; // ✨ para sa DB::transaction(function ()
+use App\Http\Requests\SalesRequest;
+use Illuminate\Support\Facades\DB;
 use App\Services\ActivityLogger;
+use Inertia\Inertia;
 
 class SalesController extends Controller
 {
@@ -16,134 +17,151 @@ class SalesController extends Controller
      */
     public function index(Request $request)
     {
+        if (! auth()->user()->hasPermission('sales.view')) {
+            abort(403);
+        }
 
-    if (! auth()->user()->hasPermission('sales.view')) {
-    abort(403);
-}
-
+        // Search value
         $search = $request->input('search');
 
-        // Advanced logical grouping ($q) para sa Search bar ng sales transaction
+        // Get sales with product relationship
         $salesRecords = Sales::with('product')
-            ->when($search, function ($query, $search) {
-                $query->where(function ($q) use ($search) {
-                    $q->where('quantity', 'LIKE', "%{$search}%")
-                      ->orWhere('selling_price', 'LIKE', "%{$search}%");
-                });
-            })->get();
+    ->when($search, function ($query, $search) {
 
-        // Kukunin natin ang lahat ng Products para maging options sa HTML dropdown box
+        $query->where(function ($q) use ($search) {
+
+            $q->where('quantity', 'LIKE', "%{$search}%")
+                ->orWhere('selling_price', 'LIKE', "%{$search}%")
+                ->orWhereHas('product', function ($productQuery) use ($search) {
+                    $productQuery->where(
+                        'name',
+                        'LIKE',
+                        "%{$search}%"
+                    );
+                });
+
+        });
+
+    })
+    ->get();
+
+        // Products for dropdown
         $products = Product::all();
 
-        return view('sales.index', compact('salesRecords', 'products', 'search'));
+        return Inertia::render('Sales/Index', [
+            'salesRecords' => $salesRecords,
+            'products' => $products,
+            'filters' => [
+                'search' => $search,
+            ],
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-        public function store(SalesRequest $request)
+    public function store(SalesRequest $request)
     {
+        if (! auth()->user()->hasPermission('sales.create')) {
+            abort(403);
+        }
 
-    if (! auth()->user()->hasPermission('sales.create')) {
-    abort(403);
-}
-
-
-        // 🏛️ 1. Hanapin muna si product sa database para makilala siya ng computer
+        // Hanapin ang product
         $product = Product::findOrFail($request->product_id);
 
-        // 🏛️ 2. Ngayong kilala na si $product, pwede na natin siyang i-tsek kung kulang ang stock
-        if ($product && $product->stock < $request->quantity) {
-            // Kung kulang, ibabalik ang user sa form at maglalabas ng pulang error box gamit ang <x-error /> niyo
-            return redirect()->back()
-                ->withErrors(['quantity' => 'Insufficient stock! Only ' . $product->stock . ' units left in the inventory.'])
+        // Prevent negative stock
+        if ($product->stock < $request->quantity) {
+
+            return redirect()
+                ->back()
+                ->withErrors([
+                    'quantity' =>
+                        'Insufficient stock! Only ' .
+                        $product->stock .
+                        ' units left in the inventory.'
+                ])
                 ->withInput();
         }
 
-        // Binabalot natin sa closure function para kapag may nag-error sa loob, sabay silang mabubura o hindi itutuloy (Rollback)
         DB::transaction(function () use ($request, $product) {
-            
-        // 🏛️ 3. Kung sapat naman ang stock at lumusot sa harang, i-save na ang benta sa sales table
-        //  $sale = Sales::create($request->validated()); <- dati ito yung sa baba na code na pilalit para maka pag record ng total sales sa database
-        $data = $request->validated();
 
-        // Kunin ang tunay na presyo mula sa Product
-        $data['selling_price'] = $product->price;
+            // Get validated data
+            $data = $request->validated();
 
-        // Compute ang line total gamit ang trusted price
-        $data['line_total'] =
-        $data['quantity'] * $data['selling_price'];
+            // Trusted selling price from Product
+            $data['selling_price'] = $product->price;
 
-        $sale = Sales::create($data);
+            // Compute line total
+            $data['line_total'] =
+                $data['quantity'] * $data['selling_price'];
 
+            // Create sale
+            $sale = Sales::create($data);
 
-        // enter activity logs
-        $description =
-    "Sold {$sale->quantity} units of {$sale->product->name}.";
-    // closed activity logs
+            // Decrease product stock
+            $product->stock -= $request->quantity;
+            $product->save();
 
-        // 🏛️ 4. Babawasan na natin ang stock dahil ligtas at na-save na ang transaksyon
-        $product->stock -= $request->quantity;
-        $product->save();
+            // Activity Log
+            $description =
+                "Sold {$sale->quantity} units of {$sale->product->name}.";
 
-
-// enter activity logs
-ActivityLogger::log(
-    'Created',
-    'Sales',
-    $description
-);
-// closed activity logs
+            ActivityLogger::log(
+                'Created',
+                'Sales',
+                $description
+            );
         });
 
-        return redirect()->route('sales.index')->with('success', 'Sales transaction saved and product stock updated!');
+        return redirect()
+            ->route('sales.index')
+            ->with(
+                'success',
+                'Sales transaction saved and product stock updated!'
+            );
     }
 
-
-
-
-
-        /**
+    /**
      * Remove the specified resource from storage.
      */
-    // ⚠️ DAPAT SINGULAR: Pinalitan ang Sales $sales naging Sales $sale
     public function destroy(Sales $sale)
     {
-
-
-    if (! auth()->user()->hasPermission('sales.delete')) {
-    abort(403);
-}
-    DB::transaction(function () use ($sale) {
-        // 1. Hanapin kung anong produkto ang kasali sa transaksyong ito gamit ang singular $sale
-        $product = Product::find($sale->product_id);
-
-        if ($product) {
-            // 2. ✨ AUTOMATIC STOCK REVERSION:
-            // Idadagdag natin pabalik ang stock sa produkto base sa benta na ni-void
-            $product->stock += $sale->quantity;
-            $product->save();
+        if (! auth()->user()->hasPermission('sales.delete')) {
+            abort(403);
         }
-// start  activity logs
-$description =
-    "Deleted sale of {$sale->quantity} units of {$sale->product->name}.";
-// end activity logs
 
+        DB::transaction(function () use ($sale) {
 
-        // 3. Saka tuluyang buburahin ang transaksyon record gamit ang singular $sale
-        $sale->delete();
-        
-// start  activity logs
-ActivityLogger::log(
-    'Deleted',
-    'Sales',
-    $description
-);
-// end activity logs
+            // Find product
+            $product = Product::find($sale->product_id);
 
+            if ($product) {
 
-    });
-        return redirect()->route('sales.index')->with('success', 'Sales record deleted and product stock automatically adjusted!');
+                // Reverse stock
+                $product->stock += $sale->quantity;
+                $product->save();
+            }
+
+            // Activity Log Description
+            $description =
+                "Deleted sale of {$sale->quantity} units of {$sale->product->name}.";
+
+            // Delete sale
+            $sale->delete();
+
+            // Activity Log
+            ActivityLogger::log(
+                'Deleted',
+                'Sales',
+                $description
+            );
+        });
+
+        return redirect()
+            ->route('sales.index')
+            ->with(
+                'success',
+                'Sales record deleted and product stock automatically adjusted!'
+            );
     }
-
 }

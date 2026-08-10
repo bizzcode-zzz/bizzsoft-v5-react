@@ -31,6 +31,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'status' => 'boolean',
         ];
     }
 
@@ -38,10 +39,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
     public function hasPermission($permission)
     {
-    return $this->role
-        ->permissions
-        ->contains('name', $permission);
+        return $this->role
+            ->permissions
+            ->contains('name', $permission);
     }
 }

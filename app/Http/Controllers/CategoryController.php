@@ -7,6 +7,7 @@ use App\Models\Category; // ⚠️ I-import ang Category Model
 use App\Http\Requests\CategoryRequest; 
 use App\Services\ActivityLogger;
 use App\Services\AuditTrailService;
+use Inertia\Inertia;
 class CategoryController extends Controller
 {
     // Ipakita ang listahan ng mga kategorya at ang save form
@@ -27,7 +28,12 @@ if (! auth()->user()->hasPermission('categories.view')) {
     })->get();
 
     // Ipapasa natin ang $categories at ang huling hinanap na text ($search) sa view
-    return view('categories.index', compact('categories', 'search'));
+      return Inertia::render('Categories/Index', [
+        'categories' => $categories,
+        'filters' => [
+            'search' => $search,  
+        ],
+    ]);
 }
 
 
@@ -63,7 +69,10 @@ if (! auth()->user()->hasPermission('categories.view')) {
     abort(403);
 }
 
-    return view('categories.edit', compact('category'));
+    return Inertia::render('Categories/Edit', [
+    'category' => $category
+]);
+
 }
 
 
@@ -93,7 +102,7 @@ public function update(CategoryRequest $request, Category $category)
 );
 // CLOSED PARA SA ACTIVITY LOG
 
-    return redirect()->route('categories.index');
+    return redirect()->route('categories.index')->with('success', 'Category updated successfully!');
 }
 
 

@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use Inertia\Inertia;
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SupplierController;
@@ -13,113 +16,89 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActivityLogController;
 
-
-// Root
+// Landing Page (Breeze)
 Route::get('/', function () {
-    return redirect()->route('dashboard.index');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+         
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
 
-// Guest Routes
-Route::middleware('guest')->group(function () {
 
-    Route::get('/login', [AuthController::class, 'showLogin'])
-        ->name('login');
-
-    Route::post('/login', [AuthController::class, 'login'])
-        ->name('login.submit');
-
-});
-
+// Dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 // Authenticated Routes
 Route::middleware('auth')->group(function () {
 
-    Route::resource('dashboard', DashboardController::class)
-        ->only('index');
+    // Profile (Breeze)
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Products
     Route::resource('products', ProductController::class);
 
+    // Categories
     Route::resource('categories', CategoryController::class);
 
+    // Suppliers
     Route::resource('suppliers', SupplierController::class);
 
+    // Purchases
     Route::resource('purchases', PurchaseController::class);
 
+    // Sales
     Route::resource('sales', SalesController::class);
 
-
+    // Users
     Route::resource('users', UserController::class);
+
     Route::patch('/users/{user}/toggle-status', [UserController::class, 'toggleStatus'])
-    ->name('users.toggle-status');
+        ->name('users.toggle-status');
+
     Route::get('/users/{user}/reset-password', [UserController::class, 'showResetPassword'])
-    ->name('users.reset-password');
+        ->name('users.reset-password');
+
     Route::patch('/users/{user}/reset-password', [UserController::class, 'resetPassword'])
-    ->name('users.reset-password.update');
+        ->name('users.reset-password.update');
 
-
+    // Activity Logs
     Route::get('/activity-logs', [ActivityLogController::class, 'index'])
-    ->name('activity-logs.index');
-
+        ->name('activity-logs.index');
 
     // Reports
     Route::get('/reports', [ReportsController::class, 'index'])
         ->name('reports.index');
 
-        
-
     Route::get('/reports/sales', [ReportsController::class, 'sales'])
         ->name('reports.sales');
 
-// ✅ NEW SALES PRINT ROUTE
-    Route::get('/reports/sales/print', [ReportsController::class, 'salesPrint'])
-    ->name('reports.sales.print');
-// ✅ SALES PDF
-    Route::get('/reports/sales/pdf', [ReportsController::class, 'salesPdf'])
-    ->name('reports.sales.pdf');
-
-
-
+    Route::get('/reports/sales/print', [ReportsController::class, 'printSales'])
+        ->name('reports.sales.print');
 
     Route::get('/reports/purchases', [ReportsController::class, 'purchases'])
         ->name('reports.purchases');
 
-// ✅ NEW PURCHASE PRINT ROUTE
-        Route::get('/reports/purchases/print', [ReportsController::class, 'purchasesPrint'])
-    ->name('reports.purchases.print');
-// ✅ PURCHASES PDF
-    Route::get('/reports/purchases/pdf', [ReportsController::class, 'purchasesPdf'])
-    ->name('reports.purchases.pdf');
-
-
+    Route::get('/reports/purchases/print', [ReportsController::class, 'printPurchases'])
+        ->name('reports.purchases.print');
 
     Route::get('/reports/inventory', [ReportsController::class, 'inventory'])
         ->name('reports.inventory');
 
-// ✅ NEW INVENTORY PRINT ROUTE
-        Route::get('/reports/inventory/print', [ReportsController::class, 'inventoryPrint'])
-    ->name('reports.inventory.print');
-// ✅ INVENTORY PDF
-    Route::get('/reports/inventory/pdf', [ReportsController::class, 'inventoryPdf'])
-    ->name('reports.inventory.pdf');
-
-
-
+    Route::get('/reports/inventory/print', [ReportsController::class, 'printInventory'])
+        ->name('reports.inventory.print');
 
     Route::get('/reports/low-stock', [ReportsController::class, 'lowstock'])
         ->name('reports.low_stock');
-        
-// ✅ NEW INVENTORY PRINT ROUTE
-        Route::get('/reports/low-stock/print', [ReportsController::class, 'lowStockPrint'])
-    ->name('reports.low-stock.print');
-// ✅ LOWSTOCK PDF
-    Route::get('/reports/lowstock/pdf', [ReportsController::class, 'lowstockPdf'])
-    ->name('reports.lowstock.pdf');
 
-
-
-
-    Route::post('/logout', [AuthController::class, 'logout'])
-    ->name('logout');
-
+    Route::get('/reports/low-stock/print', [ReportsController::class, 'printLowStock'])
+        ->name('reports.low_stock.print');
 });
+
+require __DIR__ . '/auth.php';

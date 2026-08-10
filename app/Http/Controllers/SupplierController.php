@@ -7,6 +7,7 @@ use App\Models\Supplier;
 use App\Http\Requests\SupplierRequest; 
 use App\Services\ActivityLogger;
 use App\Services\AuditTrailService;
+use Inertia\Inertia;
 class SupplierController extends Controller
 {
     // Ipakita ang listahan ng mga supplier at ang save form
@@ -31,7 +32,12 @@ class SupplierController extends Controller
     })->get();
 
         // Ipapasa natin ang $suppliers at ang huling hinanap na text ($search) sa view
-        return view('suppliers.index', compact('suppliers', 'search'));
+       return Inertia::render('Suppliers/Index', [
+            'suppliers' => $suppliers,
+            'filters' => [
+                'search' => $search,
+            ],
+        ]);
     }
 
     // I-save ang bagong supplier
@@ -63,7 +69,9 @@ class SupplierController extends Controller
     abort(403);
 }
 
-        return view('suppliers.edit', compact('supplier'));
+         return Inertia::render('Suppliers/Edit', [
+            'supplier' => $supplier,
+        ]);
     }
 
 

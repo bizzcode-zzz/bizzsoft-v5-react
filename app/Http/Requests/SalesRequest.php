@@ -11,7 +11,6 @@ class SalesRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        
         return true;
     }
 
@@ -20,12 +19,12 @@ class SalesRequest extends FormRequest
      */
     public function rules(): array
     {
-        // ✨ ISININGIT NATIN ANG MGA RIGOROUS CONSTRAINTS DITO BRO:
         return [
-            'product_id'    => 'required|exists:products,id',      // Piliting umiiral ang Product ID sa database
-            'quantity'      => 'required|integer|min:1',           // Bawal magbenta ng 0 o negatibong piraso
-            'selling_price' => 'required|numeric|min:0',           // Bawal ang negatibong presyo ng benta
-            'sales_date'    => 'required|date|before_or_equal:today', // Bawal mag-advance ng petsa sa hinaharap
+            'product_id' => 'required|exists:products,id',
+
+            'quantity' => 'required|integer|min:1',
+
+            'sales_date' => 'required|date|before_or_equal:today',
         ];
     }
 
@@ -34,12 +33,27 @@ class SalesRequest extends FormRequest
      */
     public function messages(): array
     {
-        
         return [
-            'product_id.required'    => 'Product is required.',
-            'quantity.required'      => 'Quantity is required.',
-            'selling_price.required' => 'Selling Price is required.',
-            'sales_date.required'    => 'Sales Date is required.',
+            'product_id.required' =>
+                'Product is required.',
+
+            'quantity.required' =>
+                'Quantity is required.',
+
+            'quantity.integer' =>
+                'Quantity must be a whole number.',
+
+            'quantity.min' =>
+                'Quantity must be at least 1.',
+
+            'sales_date.required' =>
+                'Sales Date is required.',
+
+            'sales_date.date' =>
+                'Sales Date must be a valid date.',
+
+            'sales_date.before_or_equal' =>
+                'Sales Date cannot be in the future.',
         ];
     }
 }

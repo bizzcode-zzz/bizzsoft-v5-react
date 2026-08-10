@@ -7,6 +7,7 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Services\ActivityLogger;
 use App\Services\AuditTrailService;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
@@ -26,7 +27,14 @@ class ProductController extends Controller
 
     $categories = Category::all();
 
-    return view('products.index', compact('products', 'categories'));
+    return Inertia::render('Products/Index', [
+    'products' => $products,
+    'categories' => $categories,
+    'filters' => [
+        'search' => $request->search,
+    ],
+]);
+
 }
  
 
@@ -46,7 +54,9 @@ public function store(ProductRequest $request)
     'Created product: ' . $request->name
 );
 
-    return redirect('/products');
+    return redirect()
+    ->route('products.index')
+    ->with('success', 'Product created successfully.');
 }
 
 
@@ -55,13 +65,18 @@ public function store(ProductRequest $request)
 
 
 
-   public function edit(Product $product)
+ public function edit(Product $product)
 {
     if (! auth()->user()->hasPermission('products.edit')) {
-    abort(403);
-}
+        abort(403);
+    }
+
     $categories = Category::all();
-    return view('products.edit', compact('product', 'categories'));
+
+    return Inertia::render('Products/Edit', [
+        'product' => $product,
+        'categories' => $categories,
+    ]);
 }
 
 
@@ -93,22 +108,26 @@ AuditTrailService::logUpdate(
 );
 // CLOSED PARA SA ACTIVITY LOG
 
-    return redirect('/products');
+    return redirect()
+    ->route('products.index')
+    ->with('success', 'Product updated successfully.');
 }
 
 
 
 
 
-    public function destroy(Product $product)
+  public function destroy(Product $product)
 {
-    
-if (! auth()->user()->hasPermission('products.delete')) {
-    abort(403);
-}
+    if (! auth()->user()->hasPermission('products.delete')) {
+        abort(403);
+    }
+
     $product->delete();
 
-    return redirect('/products');
+    return redirect()
+        ->route('products.index')
+        ->with('success', 'Product deleted successfully.');
 }
 
 }

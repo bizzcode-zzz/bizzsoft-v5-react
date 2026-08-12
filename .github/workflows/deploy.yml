@@ -1,4 +1,4 @@
-name: BizzSoft Auto Deploy
+name: BizzSoft V5 Auto Deploy
 
 on:
   push:
@@ -10,10 +10,50 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      # 1. Get the latest source code
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Deploy to Hostinger
+      # 2. Prepare Node.js environment on GitHub Actions
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # 3. Install frontend dependencies
+      - name: Install Node Dependencies
+        run: npm ci
+
+      # 4. Build React / Vite production assets
+      - name: Build React Application
+        run: npm run build
+
+      # 5. Make sure the build directory exists on Hostinger
+      - name: Prepare Hostinger Build Directory
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 145.79.28.207
+          username: u180948312
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 65002
+          script: |
+            mkdir -p /home/u180948312/laravel_app/public/build
+
+      # 6. Upload the generated React/Vite build
+      - name: Upload React Build
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 145.79.28.207
+          username: u180948312
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 65002
+          source: "public/build/*"
+          target: "/home/u180948312/laravel_app/public/build"
+
+      # 7. Deploy Laravel application
+      - name: Deploy Laravel Application
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 145.79.28.207
@@ -35,10 +75,7 @@ jobs:
             echo "Running Database Migrations..."
             /opt/alt/php83/usr/bin/php artisan migrate --force || exit 1
 
-            echo "Running Database Seeders..."
-            /opt/alt/php83/usr/bin/php artisan db:seed --force || exit 1
-
             echo "Optimizing Laravel..."
             /opt/alt/php83/usr/bin/php artisan optimize || exit 1
 
-            echo "✅ Deployment completed successfully!"
+            echo "✅ BizzSoft V5 deployment completed successfully!"

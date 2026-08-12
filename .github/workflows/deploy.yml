@@ -39,7 +39,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 65002
           script: |
-            mkdir -p /home/u180948312/laravel_app/public/build
+            mkdir -p /home/u180948312/laravel_v5/public/build
 
       # 6. Upload the generated React/Vite build
       - name: Upload React Build
@@ -50,7 +50,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 65002
           source: "public/build/*"
-          target: "/home/u180948312/laravel_app/public/build"
+          target: "/home/u180948312/laravel_v5/public/build"
 
       # 7. Deploy Laravel application
       - name: Deploy Laravel Application
@@ -61,7 +61,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 65002
           script: |
-            cd /home/u180948312/laravel_app
+            cd /home/u180948312/laravel_v5
 
             echo "Current Directory:"
             pwd

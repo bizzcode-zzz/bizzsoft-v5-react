@@ -35,18 +35,18 @@ export default function Sales({
         <AuthenticatedLayout
             header={
                 <div>
-                    <h2 className="text-2xl font-extrabold text-[#102a56]">
+                    <h2 className="text-2xl font-extrabold text-[#102a56] dark:text-blue-300">
                         Sales Report
                     </h2>
 
-                    <p className="mt-1 text-sm text-slate-500">
+                    <p className="mt-1 text-sm text-slate-500 dark:text-gray-300">
                         View sales transactions, quantities, and total sales.
                     </p>
                 </div>
             }
         >
 
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-sky-50 py-8">
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-sky-50 py-8 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
 
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
@@ -172,6 +172,8 @@ export default function Sales({
                                             duration-150
                                             ease-in-out
                                             hover:bg-[#173b73]
+                                            dark:bg-blue-700
+                                            dark:hover:bg-blue-600
                                         "
                                     >
                                         {({ loading }) =>
@@ -198,7 +200,7 @@ export default function Sales({
 
                         <Card title="💰 Total Sales">
 
-                            <h3 className="text-2xl font-bold text-green-600">
+                            <h3 className="text-2xl font-bold text-green-600 dark:text-green-400">
                                 ₱{Number(totalSales).toFixed(2)}
                             </h3>
 
@@ -207,7 +209,7 @@ export default function Sales({
 
                         <Card title="📦 Total Quantity">
 
-                            <h3 className="text-2xl font-bold text-[#102a56]">
+                            <h3 className="text-2xl font-bold text-[#102a56] dark:text-blue-300">
                                 {totalQuantity}
                             </h3>
 
@@ -216,7 +218,7 @@ export default function Sales({
 
                         <Card title="🧾 Total Transactions">
 
-                            <h3 className="text-2xl font-bold text-[#102a56]">
+                            <h3 className="text-2xl font-bold text-[#102a56] dark:text-blue-300">
                                 {totalTransactions}
                             </h3>
 
@@ -251,7 +253,7 @@ export default function Sales({
 
                                     <td
                                         colSpan="6"
-                                        className="px-4 py-8 text-center text-sm text-slate-500"
+                                        className="px-4 py-8 text-center text-sm"
                                     >
                                         No sales transactions found.
                                     </td>
@@ -264,40 +266,52 @@ export default function Sales({
 
                                     <tr
                                         key={sale.id}
-                                        className="border-t border-slate-100 transition hover:bg-blue-50/50"
+                                        className="border-t border-slate-100 transition hover:bg-blue-50/50 dark:border-gray-700 dark:hover:bg-gray-700/50"
                                     >
 
-                                        <td className="w-[14%] whitespace-nowrap px-4 py-3 text-sm font-bold text-[#102a56]">
+                                        {/* Transaction ID */}
+
+                                        <td className="w-[14%] whitespace-nowrap px-4 py-3 text-sm font-bold text-[#102a56] dark:text-blue-300">
                                             #SALE-{sale.id}
                                         </td>
 
 
-                                        <td className="w-[22%] px-4 py-3 text-sm font-medium text-slate-700">
+                                        {/* Product */}
+
+                                        <td className="w-[22%] px-4 py-3 text-sm font-medium">
                                             {sale.product?.name ??
                                                 'Unknown Product'}
                                         </td>
 
 
-                                        <td className="w-[12%] whitespace-nowrap px-4 py-3 text-sm text-slate-600">
+                                        {/* Quantity */}
+
+                                        <td className="w-[12%] whitespace-nowrap px-4 py-3 text-sm">
                                             {sale.quantity}
                                         </td>
 
 
-                                        <td className="w-[17%] whitespace-nowrap px-4 py-3 text-sm text-slate-600">
+                                        {/* Selling Price */}
+
+                                        <td className="w-[17%] whitespace-nowrap px-4 py-3 text-sm">
                                             ₱{Number(
                                                 sale.selling_price
                                             ).toFixed(2)}
                                         </td>
 
 
-                                        <td className="w-[17%] whitespace-nowrap px-4 py-3 text-sm font-bold text-green-600">
+                                        {/* Total Sale */}
+
+                                        <td className="w-[17%] whitespace-nowrap px-4 py-3 text-sm font-bold text-green-600 dark:text-green-400">
                                             ₱{Number(
                                                 sale.line_total
                                             ).toFixed(2)}
                                         </td>
 
 
-                                        <td className="w-[18%] whitespace-nowrap px-4 py-3 text-sm text-slate-600">
+                                        {/* Sale Date */}
+
+                                        <td className="w-[18%] whitespace-nowrap px-4 py-3 text-sm">
                                             {sale.sales_date}
                                         </td>
 
@@ -337,8 +351,8 @@ export default function Sales({
                                             transition
                                             ${
                                                 link.active
-                                                    ? 'border-[#102a56] bg-[#102a56] text-white'
-                                                    : 'border-slate-200 bg-white text-slate-600 hover:bg-blue-50 hover:text-[#102a56]'
+                                                    ? 'border-[#102a56] bg-[#102a56] text-white dark:border-blue-600 dark:bg-blue-600'
+                                                    : 'border-slate-200 bg-white text-slate-600 hover:bg-blue-50 hover:text-[#102a56] dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-blue-300'
                                             }
                                             ${
                                                 !link.url

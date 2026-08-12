@@ -8,8 +8,9 @@ export default function Select({
 }) {
     return (
         <div className="mb-4">
+
             {label && (
-                <label className="mb-2 block text-sm font-semibold text-[#f0f6fc]">
+                <label className="mb-2 block text-sm font-semibold text-gray-700 dark:text-gray-200">
                     {label}
                 </label>
             )}
@@ -21,20 +22,28 @@ export default function Select({
                     max-w-md
                     rounded-md
                     border
-                    border-[#30363d]
-                    bg-[#0d1117]
+                    border-gray-300
+                    bg-white
                     px-3
                     py-2
                     text-sm
-                    text-[#f0f6fc]
+                    text-gray-900
                     outline-none
                     transition
-                    focus:border-[#238636]
+                    focus:border-green-600
                     focus:ring-2
-                    focus:ring-[#238636]
+                    focus:ring-green-600
+                    dark:border-gray-600
+                    dark:bg-gray-800
+                    dark:text-white
+                    dark:focus:border-green-500
+                    dark:focus:ring-green-500
                     disabled:cursor-not-allowed
                     disabled:opacity-50
-                    ${error ? 'border-[#f85149]' : ''}
+                    ${error
+                        ? 'border-red-500 dark:border-red-500'
+                        : ''
+                    }
                     ${className}
                 `}
             >
@@ -42,16 +51,17 @@ export default function Select({
             </select>
 
             {hint && !error && (
-                <p className="mt-1 text-xs text-[#8b949e]">
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
                     {hint}
                 </p>
             )}
 
             {error && (
-                <p className="mt-1 text-xs text-[#f85149]">
+                <p className="mt-1 text-xs text-red-500 dark:text-red-400">
                     {error}
                 </p>
             )}
+
         </div>
     );
 }

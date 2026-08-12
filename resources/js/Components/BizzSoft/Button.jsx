@@ -14,7 +14,7 @@ export default function Button({
             'bg-blue-600 hover:bg-blue-700 text-white shadow-sm shadow-blue-600/20',
 
         secondary:
-            'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200',
+            'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:border-gray-600',
 
         danger:
             'bg-red-600 hover:bg-red-700 text-white shadow-sm shadow-red-600/20',
@@ -39,6 +39,7 @@ export default function Button({
         focus:ring-blue-500
         focus:ring-offset-2
         focus:ring-offset-white
+        dark:focus:ring-offset-gray-900
         ${variants[variant] ?? variants.primary}
         ${className}
     `;

@@ -1,122 +1,276 @@
-# 📦 BizzSoft Inventory Management System V4
+# 📦 BizzSoft Inventory Management System V5
 
-A modern Laravel 12 Inventory Management System built using software engineering best practices, featuring Role-Based Access Control (RBAC), Activity Logs, and secure business logic.
+<p align="center">
+  <strong>A production-style inventory management system built with Laravel 12, React, Inertia.js, and Tailwind CSS.</strong>
+</p>
 
-![Laravel](https://img.shields.io/badge/Laravel-12-red)
-![PHP](https://img.shields.io/badge/PHP-8.2-blue)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-5-purple)
-![MySQL](https://img.shields.io/badge/MySQL-Database-orange)
-![RBAC](https://img.shields.io/badge/RBAC-Implemented-success)
-![Activity Logs](https://img.shields.io/badge/Activity%20Logs-Enabled-brightgreen)
-![Status](https://img.shields.io/badge/Status-Portfolio%20Ready-success)
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white" alt="Laravel 12" />
+  <img src="https://img.shields.io/badge/PHP-8.2-777BB4?logo=php&logoColor=white" alt="PHP 8.2" />
+  <img src="https://img.shields.io/badge/React-Frontend-61DAFB?logo=react&logoColor=black" alt="React" />
+  <img src="https://img.shields.io/badge/Inertia.js-Integration-9553E9?logo=inertia&logoColor=white" alt="Inertia.js" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-Styling-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/MySQL-Database-4479A1?logo=mysql&logoColor=white" alt="MySQL" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/RBAC-Implemented-success" alt="RBAC" />
+  <img src="https://img.shields.io/badge/Activity_Logs-Enabled-brightgreen" alt="Activity Logs" />
+  <img src="https://img.shields.io/badge/GitHub_Actions-Auto_Deploy-2088FF?logo=githubactions&logoColor=white" alt="GitHub Actions" />
+  <img src="https://img.shields.io/badge/Deployment-Hostinger-673DE6" alt="Hostinger" />
+  <img src="https://img.shields.io/badge/Status-Portfolio_Ready-success" alt="Portfolio Ready" />
+</p>
+
+---
 
 ## 📖 About
 
-BizzSoft Inventory Management System V4 is a production-style inventory management application developed with **Laravel 12**. It was designed to demonstrate clean architecture, maintainable code, and real-world business workflows using modern software engineering practices.
+**BizzSoft Inventory Management System V5** is a production-style inventory management application developed as a portfolio and software engineering learning project.
 
-The system provides complete inventory management through Product, Category, Supplier, Purchase, Sales, Reports, User Management, and Activity Logs modules. It also implements Role-Based Access Control (RBAC), database transactions, server-side business logic, and audit logging to ensure data integrity and application security.
+Version 5 represents the evolution of the earlier BizzSoft inventory system into a modern **Laravel + React + Inertia.js** application. The project combines a Laravel backend with a React-based frontend while keeping business rules, validation, authorization, database integrity, and application logic on the server side.
 
-This project was built as a portfolio application to showcase practical Laravel development skills and the application of industry-standard software engineering principles.
+The system covers the complete inventory workflow including **Products, Categories, Suppliers, Purchases, Sales, Reports, User Management, Dashboard, and Activity Logs**.
 
+The project is designed to demonstrate practical full-stack development skills, including application architecture, CRUD development, database relationships, business transactions, RBAC, audit logging, deployment, and modern React frontend development.
 
-## ✨ Features
+---
+
+## ✨ Core Features
 
 ### 📦 Inventory Management
 
-Manage inventory efficiently with complete CRUD operations and inventory monitoring.
-
-* Product Management
-* Category Management
-* Supplier Management
-* Search Functionality
-* Low Stock Monitoring
-* Reorder Level Tracking
+- Product Management
+- Category Management
+- Supplier Management
+- Product search
+- Category and supplier relationships
+- Stock quantity tracking
+- Reorder level tracking
+- Low-stock monitoring
 
 ### 🛒 Purchase Management
 
-Record product purchases while automatically updating inventory levels.
-
-* Purchase Transactions
-* Automatic Stock Increase
-* Historical Purchase Records
-* Database Transactions for Data Integrity
+- Purchase transactions
+- Automatic stock increase after purchase
+- Purchase history
+- Product relationship handling
+- Stock reversal when a purchase transaction is deleted
+- Database transactions for data integrity
 
 ### 💰 Sales Management
 
-Process sales with built-in inventory validation and secure business logic.
-
-* Sales Transactions
-* Automatic Stock Deduction
-* Stock Availability Validation
-* Historical Selling Price Recording
-* Automatic Line Total Calculation
+- Sales transactions
+- Automatic stock deduction
+- Stock availability validation
+- Prevention of negative stock
+- Historical selling price recording
+- Automatic line-total calculation
+- Stock restoration when a sale is deleted/voided
+- Database transactions for critical sales operations
 
 ### 👥 User Management
 
-Manage system users with role-based permissions.
+- User creation and editing
+- Role assignment
+- Active / inactive account status
+- Password reset
+- User search and filtering
+- Role-based permissions
 
-* User Management
-* Account Status (Active / Inactive)
-* Password Reset
-* Role Assignment
+### 🔐 Authentication, Authorization & Security
 
-### 🔐 Security & Software Engineering
+- Laravel authentication
+- Role-Based Access Control (RBAC)
+- Database-driven roles and permissions
+- Permission checks in controllers
+- Blade/React authorization-aware UI
+- Form Request validation
+- Route Model Binding
+- Server-side business logic
+- Secure password hashing
 
-Built using modern Laravel development practices.
+### 📝 Activity Logs & Audit Trail
 
-* Authentication
-* Role-Based Access Control (RBAC)
-* Form Request Validation
-* Route Model Binding
-* Eloquent ORM Relationships
-* Database Transactions
-* Activity Logging
-* Secure Server-side Business Logic
+The system records important user and business activities for accountability and auditing.
 
-### 📊 Reports & Dashboard
+- Product activities
+- Purchase activities
+- Sales activities
+- User Management activities
+- Centralized activity logging services
+- Audit trail support
 
-Monitor business performance through real-time summaries and reports.
+### 📊 Dashboard & Reports
 
-* Business Dashboard
-* Sales Reports
-* Purchase Reports
-* Inventory Reports
-* Recent Sales Activity
-* Recent Purchase Activity
-* Low Stock Summary
+- Business dashboard
+- Product, category, supplier, sales, and purchase summaries
+- Sales reports
+- Purchase reports
+- Inventory reports
+- Low-stock reports
+- Recent sales and purchase activity
 
-### 📝 Activity Logs
+### 🎨 Modern React UI
 
-Track important system events for auditing and accountability.
+- React-based frontend
+- Inertia.js page navigation
+- Reusable BizzSoft UI components
+- Responsive layouts
+- Search and interactive forms
+- Dark / Light theme support
+- Theme synchronization across public and authenticated pages
+- Modern Tailwind CSS styling
 
-* Product Activities
-* Purchase Activities
-* Sales Activities
-* User Management Activities
+---
 
 ## 🛠 Tech Stack
 
-| Category            | Technology                                  |
-| ------------------- | ------------------------------------------- |
-| **Backend**         | Laravel 12, PHP 8.2                         |
-| **Frontend**        | Blade, Bootstrap 5, HTML5, CSS3, JavaScript |
-| **Database**        | MySQL                                       |
-| **ORM**             | Eloquent ORM                                |
-| **Authentication**  | Laravel Authentication                      |
-| **Authorization**   | Role-Based Access Control (RBAC)            |
-| **Validation**      | Laravel Form Requests                       |
-| **Architecture**    | MVC (Model-View-Controller)                 |
-| **Version Control** | Git & GitHub                                |
-| **Deployment**      | Hostinger                                   |
+| Category | Technology |
+| --- | --- |
+| **Backend** | Laravel 12 |
+| **Language** | PHP 8.2 |
+| **Frontend** | React |
+| **SPA Bridge** | Inertia.js |
+| **Styling** | Tailwind CSS |
+| **Database** | MySQL |
+| **ORM** | Eloquent ORM |
+| **Authentication** | Laravel Authentication |
+| **Authorization** | Database-driven RBAC |
+| **Validation** | Laravel Form Requests |
+| **Architecture** | MVC + React/Inertia frontend |
+| **Version Control** | Git & GitHub |
+| **CI/CD** | GitHub Actions |
+| **Deployment** | Hostinger |
 
+---
+
+## 🏗️ Architecture & Engineering Practices
+
+BizzSoft V5 follows a layered Laravel application structure with a React/Inertia frontend.
+
+```text
+                    BizzSoft V5
+                         │
+          ┌──────────────┴──────────────┐
+          │                             │
+     React Frontend                Laravel Backend
+     + Inertia.js                       │
+          │                             │
+          │                     Controllers / Requests
+          │                             │
+          │                       Services / Models
+          │                             │
+          └──────────────┬──────────────┘
+                         ↓
+                      MySQL
+```
+
+### Engineering Concepts Applied
+
+- MVC architecture
+- React component-based frontend development
+- Inertia.js integration
+- Eloquent ORM
+- Eloquent relationships
+- Route Model Binding
+- Form Request validation
+- `validated()` request handling
+- Database transactions using `DB::transaction()`
+- Server-side business rules
+- Database-driven RBAC
+- Permission-based authorization
+- Activity logging and audit trails
+- Reusable frontend components
+- Git/GitHub version control
+- Automated deployment with GitHub Actions
+
+---
+
+## 📐 Business Rules
+
+The application enforces important inventory business rules on the server side.
+
+- Purchasing a product automatically increases its stock.
+- Selling a product automatically decreases its stock.
+- Sales cannot reduce inventory below zero.
+- Historical selling prices are preserved with sales transactions.
+- Sales line totals are calculated from quantity × selling price.
+- Deleting a purchase reverses its stock increase.
+- Deleting/voiding a sale returns the sold quantity to stock.
+- Critical purchase and sales operations are protected by database transactions.
+- User permissions determine access to protected modules and actions.
+
+---
+
+## 🔐 Role-Based Access Control
+
+BizzSoft V5 uses a database-driven authorization system rather than hard-coded role assumptions.
+
+```text
+User
+ ↓
+Role
+ ↓
+Permissions
+ ↓
+Protected Modules / Actions
+```
+
+Example permission areas include:
+
+- Dashboard
+- Products
+- Categories
+- Suppliers
+- Purchases
+- Sales
+- Reports
+- Users
+- Activity Logs
+
+This allows the system to distinguish what an **Administrator** or **Staff** user is allowed to access.
+
+---
+
+## 📝 Activity Logging
+
+Activity logging is implemented as part of the application's audit trail architecture.
+
+The project includes reusable services for recording important actions, allowing business modules to produce consistent activity records without duplicating logging logic everywhere.
+
+Current activity coverage includes Product, Purchase, Sales, and User Management operations.
+
+---
+
+## 🚀 Deployment & CI/CD
+
+The project is deployed to **Hostinger** and uses **GitHub Actions** for automated deployment.
+
+The deployment workflow is triggered from the GitHub repository and performs the required application deployment steps on the production server.
+
+```text
+Developer
+   ↓
+Git Commit / Push
+   ↓
+GitHub
+   ↓
+GitHub Actions
+   ↓
+Hostinger
+   ↓
+BizzSoft V5 Production
+```
+
+---
 
 ## 📸 Screenshots
 
-Below are screenshots showcasing the main features of the **BizzSoft Inventory Management System V4**.
+The repository contains portfolio screenshots showcasing the major areas of BizzSoft V5.
 
-### 📊 System Dashboard
+### 📊 Dashboard
 
-Real-time business overview with inventory statistics, transaction summaries, and recent business activities.
+Business overview with inventory and transaction summaries.
 
 ![Dashboard](screenshots/dashboard.png)
 
@@ -124,7 +278,7 @@ Real-time business overview with inventory statistics, transaction summaries, an
 
 ### 📦 Product Management
 
-Manage products with category assignment, pricing, stock monitoring, and reorder level tracking.
+Product management with pricing, stock, categories, suppliers, and reorder levels.
 
 ![Products](screenshots/products.png)
 
@@ -132,7 +286,7 @@ Manage products with category assignment, pricing, stock monitoring, and reorder
 
 ### 🛒 Purchase Management
 
-Record purchases while automatically increasing product inventory through secure database transactions.
+Purchase transactions with automatic inventory updates.
 
 ![Purchases](screenshots/purchases.png)
 
@@ -140,7 +294,7 @@ Record purchases while automatically increasing product inventory through secure
 
 ### 💰 Sales Management
 
-Process sales with automatic stock deduction, inventory validation, historical selling price recording, and line total computation.
+Sales transactions with stock validation, automatic deduction, and line totals.
 
 ![Sales](screenshots/sales.png)
 
@@ -148,7 +302,7 @@ Process sales with automatic stock deduction, inventory validation, historical s
 
 ### 👥 User Management
 
-Manage users, roles, account status, and permissions through Role-Based Access Control (RBAC).
+User administration with roles, permissions, account status, and password management.
 
 ![Users](screenshots/users.png)
 
@@ -156,7 +310,7 @@ Manage users, roles, account status, and permissions through Role-Based Access C
 
 ### 📊 Reports
 
-Generate business reports for sales, purchases, inventory, and stock monitoring.
+Sales, purchase, inventory, and low-stock reporting.
 
 ![Reports](screenshots/reports.png)
 
@@ -164,31 +318,31 @@ Generate business reports for sales, purchases, inventory, and stock monitoring.
 
 ### 📝 Activity Logs
 
-Track important system activities including product, purchase, sales, and user management operations for auditing purposes.
+Audit history for important system operations.
 
 ![Activity Logs](screenshots/activity-logs.png)
 
+---
 
-## ⚙️ Installation
-
-Follow the steps below to run the project on your local machine.
+## ⚙️ Local Installation
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/bizzcode-zzz/BizzSoft-Inventory-Management-System-V4.git
+git clone https://github.com/bizzcode-zzz/bizzsoft-v5-react.git
+cd bizzsoft-v5-react
 ```
 
-### 2. Navigate to the project directory
-
-```bash
-cd inventory_v4_laravel
-```
-
-### 3. Install project dependencies
+### 2. Install PHP dependencies
 
 ```bash
 composer install
+```
+
+### 3. Install frontend dependencies
+
+```bash
+npm install
 ```
 
 ### 4. Create the environment file
@@ -205,7 +359,7 @@ php artisan key:generate
 
 ### 6. Configure the database
 
-Update your `.env` file with your MySQL database credentials.
+Update `.env` with your local MySQL credentials.
 
 Example:
 
@@ -213,200 +367,195 @@ Example:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=inventory_v4
+DB_DATABASE=bizzsoft
 DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-### 7. Run database migrations
+### 7. Run migrations and seed the database
 
 ```bash
-php artisan migrate
+php artisan migrate --seed
 ```
 
-### 8. Seed the default system data
-
-```bash
-php artisan db:seed
-```
-
-### 9. Start the development server
+### 8. Start Laravel
 
 ```bash
 php artisan serve
 ```
 
-Open your browser and visit:
+### 9. Start the Vite development server
+
+In a second terminal:
+
+```bash
+npm run dev
+```
+
+Open:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-## 🔑 Default Accounts
-
-The following accounts are available after running the database seeders.
-
-### 👑 Administrator
-
-| Field        | Value                                           |
-| ------------ | ----------------------------------------------- |
-| **Email**    | [admin@bizzsoft.dev](mailto:admin@bizzsoft.dev) |
-| **Password** | password                                        |
+> **Note:** Demo credentials, if used, should be obtained from the project's seeders or local development configuration. Production credentials must never be committed to the repository.
 
 ---
 
-### 👨‍💼 Staff
-
-| Field        | Value                                           |
-| ------------ | ----------------------------------------------- |
-| **Email**    | [staff@bizzsoft.dev](mailto:staff@bizzsoft.dev) |
-| **Password** | password                                        |
-
-> **Note:** These are demo accounts created by the database seeders for testing and development purposes.
-
-## 🏗️ System Architecture
-
-The project follows the **Model-View-Controller (MVC)** architectural pattern provided by Laravel, promoting clean separation of concerns, maintainability, and scalability.
-
-### Architecture Overview
-
-* **Model** – Handles database operations using Eloquent ORM.
-* **View** – Blade templates for rendering the user interface.
-* **Controller** – Manages business logic and coordinates requests between models and views.
-
-### Software Engineering Principles
-
-* MVC (Model-View-Controller)
-* Eloquent ORM
-* Route Model Binding
-* Form Request Validation
-* Database Transactions
-* Role-Based Access Control (RBAC)
-* Activity Logging (Audit Trail)
-* Server-side Business Logic
-* Responsive Bootstrap User Interface
-
-### Business Rules Implemented
-
-* Automatic stock increase after purchase transactions.
-* Automatic stock deduction after sales transactions.
-* Stock validation prevents negative inventory.
-* Historical selling prices are stored with every sales transaction.
-* Line totals are calculated on the server.
-* Deleted purchase transactions automatically restore stock.
-* Deleted sales transactions automatically restore stock.
-* User permissions are enforced through Role-Based Access Control (RBAC).
-* Critical business operations are protected using database transactions.
-
-### Project Goal
-
-The primary objective of this project is to demonstrate the implementation of a production-style Inventory Management System using Laravel while applying software engineering best practices, secure business logic, and maintainable application architecture.
-
-
 ## 📂 Project Structure
-
-The project follows Laravel's standard directory structure to keep the codebase organized and maintainable.
 
 ```text
 app/
 ├── Http/
 │   ├── Controllers/
+│   │   ├── Auth/
+│   │   ├── ActivityLogController.php
+│   │   ├── CategoryController.php
+│   │   ├── DashboardController.php
+│   │   ├── ProductController.php
+│   │   ├── PurchaseController.php
+│   │   ├── ReportsController.php
+│   │   ├── SalesController.php
+│   │   ├── SupplierController.php
+│   │   └── UserController.php
+│   ├── Middleware/
 │   └── Requests/
 ├── Models/
-├── Services/
+└── Services/
 
 database/
 ├── migrations/
-├── seeders/
-
-public/
-├── js/
+└── seeders/
 
 resources/
-├── views/
-│   ├── dashboard/
-│   ├── products/
-│   ├── categories/
-│   ├── suppliers/
-│   ├── purchases/
-│   ├── sales/
-│   ├── reports/
-│   ├── users/
-│   └── activity-logs/
+├── css/
+└── js/
+    ├── Components/
+    ├── Layouts/
+    ├── Pages/
+    │   ├── ActivityLogs/
+    │   ├── Auth/
+    │   ├── Categories/
+    │   ├── Products/
+    │   ├── Profile/
+    │   ├── Purchases/
+    │   ├── Reports/
+    │   ├── Sales/
+    │   ├── Suppliers/
+    │   ├── Users/
+    │   ├── Dashboard.jsx
+    │   └── Welcome.jsx
+    ├── app.jsx
+    └── bootstrap.js
 
 routes/
+├── auth.php
+├── console.php
 └── web.php
 
+.github/
+└── workflows/
+    └── deploy.yml
+
 screenshots/
-└── Portfolio images used in the README
 ```
 
-### Project Organization
+---
 
-* **Controllers** handle application logic.
-* **Models** interact with the database using Eloquent ORM.
-* **Form Requests** centralize validation logic.
-* **Services** contain reusable business services such as activity logging.
-* **Blade Views** provide the user interface.
-* **Routes** define application endpoints.
-* **Database Migrations and Seeders** manage database structure and sample data.
+## 🧪 Testing & Quality
 
+The project uses Laravel's testing infrastructure and PHPUnit for automated testing.
 
-## 🚀 Future Improvements
+Quality practices include:
 
-The following enhancements are planned for future versions of the system.
+- Validation through Form Requests
+- Server-side business rule enforcement
+- Database transaction protection
+- RBAC authorization checks
+- Manual module QA
+- Feature and unit testing support
+- Production deployment verification
 
-### 📊 Analytics & Dashboard
+---
 
-* Dashboard charts and business analytics
-* Top-selling products
-* Monthly sales trends
-* Inventory value overview
+## 🚧 Future Learning & Roadmap
 
-### 📄 Reporting
+BizzSoft V5 is also part of an ongoing full-stack development learning journey.
 
-* PDF report export
-* Excel report export
-* Printable reports
+### 🌐 REST API
 
-### 📦 Inventory
+The current V5 web application primarily uses **Laravel + Inertia.js + React** and does not require a REST API for its normal web workflow.
 
-* Barcode and QR code support
-* Batch inventory adjustments
-* Stock movement history
+A future project will introduce Laravel REST APIs and a separate client application to demonstrate:
 
-### 🌐 Platform Enhancements
+- REST API design
+- JSON request/response handling
+- API authentication
+- CRUD through APIs
+- Mobile/web client communication
+- Third-party API integration
 
-* REST API
-* Docker support
-* Cloud deployment
-* Email notifications
+### 📱 Mobile Application
 
-### 🧪 Software Quality
+A future mobile client can consume the Laravel backend through REST APIs while sharing the same business data and backend services.
 
-* Unit Testing
-* Feature Testing
-* API Testing
-* Continuous Integration (CI)
+### ☁️ Firebase
+
+Firebase will be studied separately for use cases such as real-time applications, notifications, and mobile-focused services where appropriate.
+
+### 📈 Additional Improvements
+
+- Advanced analytics and charts
+- PDF and Excel report exports
+- Barcode / QR code support
+- Stock movement history
+- Additional automated tests
+- API testing
+- Expanded CI/CD practices
+- Additional deployment and infrastructure experience
+
+---
 
 ## 👨‍💻 Developer
 
-### Alwin John P. Sitcharon
+### Alwin John
 
-**Founder / Developer**
-**BizzSoft Technologies**
+**Full-Stack Web Developer — BizzSoft**
 
-Passionate about building secure, maintainable, and scalable web applications using modern software engineering practices.
+BizzSoft V5 is a hands-on software engineering project built to demonstrate practical full-stack development skills through the design, implementation, testing, deployment, and continuous improvement of a real-world inventory management system.
 
-### Connect
+### Skills Demonstrated in This Project
 
-* **GitHub:** https://github.com/bizzcode-zzz
+- PHP & Laravel
+- React
+- Inertia.js
+- Tailwind CSS
+- MySQL
+- Eloquent ORM
+- MVC architecture
+- REST API concepts
+- Authentication & authorization
+- RBAC
+- Form Request validation
+- Database transactions
+- Business logic design
+- Activity logging / audit trails
+- Git & GitHub
+- GitHub Actions / CI/CD
+- Hostinger deployment
 
-Thank you for taking the time to explore this project. Feedback, suggestions, and contributions are always welcome.
+### GitHub
+
+https://github.com/bizzcode-zzz
+
+---
 
 ## 📄 License
 
-This project is open-source and is available under the **MIT License**.
+This project is available under the **MIT License**.
 
-You are free to use, modify, and distribute this project in accordance with the terms of the MIT License.
+---
 
+## ⭐ Project Note
+
+BizzSoft V5 is more than a CRUD application. It is a continuing full-stack engineering project focused on understanding how frontend interfaces, backend architecture, databases, authorization, business rules, testing, and deployment work together as one system.

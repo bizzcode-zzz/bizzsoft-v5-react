@@ -33,18 +33,18 @@ export default function LowStock({
         <AuthenticatedLayout
             header={
                 <div>
-                    <h2 className="text-2xl font-extrabold text-[#102a56]">
+                    <h2 className="text-2xl font-extrabold text-[#102a56] dark:text-blue-300">
                         Low Stock Report
                     </h2>
 
-                    <p className="mt-1 text-sm text-slate-500">
+                    <p className="mt-1 text-sm text-slate-500 dark:text-gray-300">
                         View products that are currently below their reorder level.
                     </p>
                 </div>
             }
         >
 
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-sky-50 py-8">
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-sky-50 py-8 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
 
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
@@ -160,6 +160,8 @@ export default function LowStock({
                                             duration-150
                                             ease-in-out
                                             hover:bg-[#173b73]
+                                            dark:bg-blue-700
+                                            dark:hover:bg-blue-600
                                         "
                                     >
                                         {({ loading }) =>
@@ -186,7 +188,7 @@ export default function LowStock({
 
                         <Card title="⚠️ Low Stock Products">
 
-                            <h3 className="text-2xl font-bold text-amber-600">
+                            <h3 className="text-2xl font-bold text-amber-600 dark:text-amber-400">
                                 {totalLowStockProducts}
                             </h3>
 
@@ -195,7 +197,7 @@ export default function LowStock({
 
                         <Card title="📦 Total Low Stock Quantity">
 
-                            <h3 className="text-2xl font-bold text-red-600">
+                            <h3 className="text-2xl font-bold text-red-600 dark:text-red-400">
                                 {totalLowStockQuantity}
                             </h3>
 
@@ -229,7 +231,7 @@ export default function LowStock({
 
                                     <td
                                         colSpan="5"
-                                        className="px-4 py-8 text-center text-sm text-slate-500"
+                                        className="px-4 py-8 text-center text-sm"
                                     >
                                         No low-stock products found.
                                     </td>
@@ -242,31 +244,41 @@ export default function LowStock({
 
                                     <tr
                                         key={product.id}
-                                        className="border-t border-slate-100 transition hover:bg-blue-50/50"
+                                        className="border-t border-slate-100 transition hover:bg-blue-50/50 dark:border-gray-700 dark:hover:bg-gray-700/50"
                                     >
 
-                                        <td className="w-[25%] px-4 py-3 text-sm font-semibold text-[#102a56]">
+                                        {/* Product */}
+
+                                        <td className="w-[25%] px-4 py-3 text-sm font-semibold text-[#102a56] dark:text-blue-300">
                                             {product.name}
                                         </td>
 
 
-                                        <td className="w-[25%] px-4 py-3 text-sm text-slate-600">
+                                        {/* Category */}
+
+                                        <td className="w-[25%] px-4 py-3 text-sm">
                                             {product.category?.category_name ??
                                                 'No Category'}
                                         </td>
 
 
-                                        <td className="w-[16%] whitespace-nowrap px-4 py-3 text-sm font-bold text-red-600">
+                                        {/* Current Stock */}
+
+                                        <td className="w-[16%] whitespace-nowrap px-4 py-3 text-sm font-bold text-red-600 dark:text-red-400">
                                             {product.stock}
                                         </td>
 
 
-                                        <td className="w-[18%] whitespace-nowrap px-4 py-3 text-sm text-slate-600">
+                                        {/* Reorder Level */}
+
+                                        <td className="w-[18%] whitespace-nowrap px-4 py-3 text-sm">
                                             {product.reorder_level}
                                         </td>
 
 
-                                        <td className="w-[16%] whitespace-nowrap px-4 py-3 text-sm font-bold text-amber-600">
+                                        {/* Status */}
+
+                                        <td className="w-[16%] whitespace-nowrap px-4 py-3 text-sm font-bold text-amber-600 dark:text-amber-400">
                                             Low Stock
                                         </td>
 
@@ -311,8 +323,8 @@ export default function LowStock({
                                                     transition
                                                     ${
                                                         link.active
-                                                            ? 'border-[#102a56] bg-[#102a56] text-white'
-                                                            : 'border-slate-200 bg-white text-slate-600 hover:bg-blue-50 hover:text-[#102a56]'
+                                                            ? 'border-[#102a56] bg-[#102a56] text-white dark:border-blue-600 dark:bg-blue-600'
+                                                            : 'border-slate-200 bg-white text-slate-600 hover:bg-blue-50 hover:text-[#102a56] dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-blue-300'
                                                     }
                                                     ${
                                                         !link.url

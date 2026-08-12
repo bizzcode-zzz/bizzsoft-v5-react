@@ -37,7 +37,7 @@ export default function SalesTable({ salesRecords = [] }) {
                     <tr>
                         <td
                             colSpan="7"
-                            className="px-4 py-6 text-center text-sm text-[#8b949e]"
+                            className="px-4 py-6 text-center text-sm"
                         >
                             No sales transactions recorded.
                         </td>
@@ -53,40 +53,60 @@ export default function SalesTable({ salesRecords = [] }) {
                         return (
                             <tr
                                 key={sale.id}
-                                className="border-t border-[#30363d]"
+                                className="border-t border-slate-100 transition hover:bg-blue-50/50 dark:border-gray-700 dark:hover:bg-gray-700/50"
                             >
 
-                                <td className="px-4 py-3 text-sm font-bold text-[#f0f6fc]">
+                                {/* Transaction ID */}
+
+                                <td className="px-4 py-3 text-sm font-bold text-[#102a56] dark:text-blue-300">
                                     #SALE-{sale.id}
                                 </td>
 
-                                <td className="px-4 py-3 text-sm text-[#f0f6fc]">
+
+                                {/* Product */}
+
+                                <td className="px-4 py-3 text-sm">
                                     {sale.product?.name ?? (
-                                        <span className="italic text-[#f85149]">
+                                        <span className="italic text-red-500 dark:text-red-400">
                                             Deleted Product
                                         </span>
                                     )}
                                 </td>
 
-                                <td className="px-4 py-3 text-sm text-[#f0f6fc]">
+
+                                {/* Quantity */}
+
+                                <td className="px-4 py-3 text-sm">
                                     {sale.quantity} units
                                 </td>
 
-                                <td className="px-4 py-3 text-sm text-[#f0f6fc]">
+
+                                {/* Selling Price */}
+
+                                <td className="px-4 py-3 text-sm">
                                     ₱{Number(
                                         sale.selling_price
                                     ).toFixed(2)}
                                 </td>
 
-                                <td className="px-4 py-3 text-sm font-bold text-[#3fb950]">
+
+                                {/* Line Total */}
+
+                                <td className="px-4 py-3 text-sm font-bold text-green-600 dark:text-green-400">
                                     ₱{Number(
                                         sale.line_total ?? lineTotal
                                     ).toFixed(2)}
                                 </td>
 
-                                <td className="px-4 py-3 text-sm text-[#f0f6fc]">
+
+                                {/* Sale Date */}
+
+                                <td className="px-4 py-3 text-sm">
                                     {sale.sale_date}
                                 </td>
+
+
+                                {/* Action */}
 
                                 <td className="px-4 py-3">
 

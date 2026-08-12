@@ -37,14 +37,14 @@ export default function ProductTable({ products }) {
 
                         {/* Product */}
 
-                        <td className="w-[25%] px-4 py-3 text-sm font-medium text-slate-700">
+                        <td className="w-[25%] px-4 py-3 text-sm font-medium">
                             {product.name}
                         </td>
 
 
                         {/* Category */}
 
-                        <td className="w-[22%] px-4 py-3 text-sm text-slate-600">
+                        <td className="w-[22%] px-4 py-3 text-sm">
                             {product.category?.category_name ??
                                 'Uncategorized'}
                         </td>
@@ -52,21 +52,21 @@ export default function ProductTable({ products }) {
 
                         {/* Price */}
 
-                        <td className="w-[12%] whitespace-nowrap px-4 py-3 text-sm font-medium text-[#102a56]">
+                        <td className="w-[12%] whitespace-nowrap px-4 py-3 text-sm font-medium text-[#102a56] dark:text-blue-300">
                             ₱{Number(product.price).toFixed(2)}
                         </td>
 
 
                         {/* Stock */}
 
-                        <td className="w-[10%] px-4 py-3 text-center text-sm text-slate-600">
+                        <td className="w-[10%] px-4 py-3 text-center text-sm">
                             {product.stock}
                         </td>
 
 
                         {/* Reorder Level */}
 
-                        <td className="w-[13%] px-4 py-3 text-center text-sm text-slate-600">
+                        <td className="w-[13%] px-4 py-3 text-center text-sm">
                             {product.reorder_level}
                         </td>
 

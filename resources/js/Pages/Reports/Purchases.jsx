@@ -35,18 +35,18 @@ export default function Purchases({
         <AuthenticatedLayout
             header={
                 <div>
-                    <h2 className="text-2xl font-extrabold text-[#102a56]">
+                    <h2 className="text-2xl font-extrabold text-[#102a56] dark:text-blue-300">
                         Purchase Report
                     </h2>
 
-                    <p className="mt-1 text-sm text-slate-500">
+                    <p className="mt-1 text-sm text-slate-500 dark:text-gray-300">
                         View purchase transactions, quantities, and total purchase costs.
                     </p>
                 </div>
             }
         >
 
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-sky-50 py-8">
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-sky-50 py-8 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
 
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
@@ -178,6 +178,8 @@ export default function Purchases({
                                             duration-150
                                             ease-in-out
                                             hover:bg-[#173b73]
+                                            dark:bg-blue-700
+                                            dark:hover:bg-blue-600
                                         "
                                     >
                                         {({ loading }) =>
@@ -204,7 +206,7 @@ export default function Purchases({
 
                         <Card title="🧾 Total Purchase Cost">
 
-                            <h3 className="text-2xl font-bold text-green-600">
+                            <h3 className="text-2xl font-bold text-green-600 dark:text-green-400">
                                 ₱{Number(
                                     totalPurchaseCost
                                 ).toFixed(2)}
@@ -215,7 +217,7 @@ export default function Purchases({
 
                         <Card title="📦 Total Quantity Purchased">
 
-                            <h3 className="text-2xl font-bold text-[#102a56]">
+                            <h3 className="text-2xl font-bold text-[#102a56] dark:text-blue-300">
                                 {totalQuantityPurchased}
                             </h3>
 
@@ -224,7 +226,7 @@ export default function Purchases({
 
                         <Card title="🧾 Total Transactions">
 
-                            <h3 className="text-2xl font-bold text-[#102a56]">
+                            <h3 className="text-2xl font-bold text-[#102a56] dark:text-blue-300">
                                 {totalTransactions}
                             </h3>
 
@@ -259,7 +261,7 @@ export default function Purchases({
 
                                     <td
                                         colSpan="6"
-                                        className="px-4 py-8 text-center text-sm text-slate-500"
+                                        className="px-4 py-8 text-center text-sm"
                                     >
                                         No purchase transactions found.
                                     </td>
@@ -282,39 +284,51 @@ export default function Purchases({
 
                                         <tr
                                             key={purchase.id}
-                                            className="border-t border-slate-100 transition hover:bg-blue-50/50"
+                                            className="border-t border-slate-100 transition hover:bg-blue-50/50 dark:border-gray-700 dark:hover:bg-gray-700/50"
                                         >
 
-                                            <td className="w-[14%] whitespace-nowrap px-4 py-3 text-sm font-bold text-[#102a56]">
+                                            {/* Transaction ID */}
+
+                                            <td className="w-[14%] whitespace-nowrap px-4 py-3 text-sm font-bold text-[#102a56] dark:text-blue-300">
                                                 #PUR-{purchase.id}
                                             </td>
 
 
-                                            <td className="w-[21%] px-4 py-3 text-sm font-medium text-slate-700">
+                                            {/* Product */}
+
+                                            <td className="w-[21%] px-4 py-3 text-sm font-medium">
                                                 {purchase.product?.name ??
                                                     'Unknown Product'}
                                             </td>
 
 
-                                            <td className="w-[21%] px-4 py-3 text-sm text-slate-600">
+                                            {/* Supplier */}
+
+                                            <td className="w-[21%] px-4 py-3 text-sm">
                                                 {purchase.supplier?.supplier_name ??
                                                     'Unknown Supplier'}
                                             </td>
 
 
-                                            <td className="w-[12%] whitespace-nowrap px-4 py-3 text-sm text-slate-600">
+                                            {/* Quantity */}
+
+                                            <td className="w-[12%] whitespace-nowrap px-4 py-3 text-sm">
                                                 {purchase.quantity}
                                             </td>
 
 
-                                            <td className="w-[15%] whitespace-nowrap px-4 py-3 text-sm text-slate-600">
+                                            {/* Cost Price */}
+
+                                            <td className="w-[15%] whitespace-nowrap px-4 py-3 text-sm">
                                                 ₱{Number(
                                                     purchase.cost_price
                                                 ).toFixed(2)}
                                             </td>
 
 
-                                            <td className="w-[17%] whitespace-nowrap px-4 py-3 text-sm font-bold text-green-600">
+                                            {/* Total Cost */}
+
+                                            <td className="w-[17%] whitespace-nowrap px-4 py-3 text-sm font-bold text-green-600 dark:text-green-400">
                                                 ₱{totalCost.toFixed(2)}
                                             </td>
 
@@ -361,8 +375,8 @@ export default function Purchases({
                                                     transition
                                                     ${
                                                         link.active
-                                                            ? 'border-[#102a56] bg-[#102a56] text-white'
-                                                            : 'border-slate-200 bg-white text-slate-600 hover:bg-blue-50 hover:text-[#102a56]'
+                                                            ? 'border-[#102a56] bg-[#102a56] text-white dark:border-blue-600 dark:bg-blue-600'
+                                                            : 'border-slate-200 bg-white text-slate-600 hover:bg-blue-50 hover:text-[#102a56] dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-blue-300'
                                                     }
                                                     ${
                                                         !link.url

@@ -7,28 +7,29 @@ export default function Index() {
         <AuthenticatedLayout
             header={
                 <div>
-                    <h2 className="text-2xl font-extrabold text-[#102a56]">
+                    <h2 className="text-2xl font-extrabold text-[#102a56] dark:text-blue-300">
                         Reports
                     </h2>
 
-                    <p className="mt-1 text-sm text-slate-500">
+                    <p className="mt-1 text-sm text-slate-500 dark:text-gray-300">
                         View sales, purchase, inventory, and low-stock reports.
                     </p>
                 </div>
             }
         >
 
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-sky-50 py-8">
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-sky-50 py-8 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
 
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 
+
                         {/* Sales Report */}
 
                         <Card title="💰 Sales Report">
 
-                            <p className="mb-4 text-sm text-slate-500">
+                            <p className="mb-4 text-sm text-slate-500 dark:text-gray-300">
                                 View sales transactions and summaries.
                             </p>
 
@@ -45,7 +46,7 @@ export default function Index() {
 
                         <Card title="🧾 Purchase Report">
 
-                            <p className="mb-4 text-sm text-slate-500">
+                            <p className="mb-4 text-sm text-slate-500 dark:text-gray-300">
                                 View purchase transactions and costs.
                             </p>
 
@@ -62,7 +63,7 @@ export default function Index() {
 
                         <Card title="📦 Inventory Report">
 
-                            <p className="mb-4 text-sm text-slate-500">
+                            <p className="mb-4 text-sm text-slate-500 dark:text-gray-300">
                                 View current inventory and stock levels.
                             </p>
 
@@ -79,7 +80,7 @@ export default function Index() {
 
                         <Card title="⚠️ Low Stock Report">
 
-                            <p className="mb-4 text-sm text-slate-500">
+                            <p className="mb-4 text-sm text-slate-500 dark:text-gray-300">
                                 View products that need restocking.
                             </p>
 
@@ -90,6 +91,7 @@ export default function Index() {
                             </Button>
 
                         </Card>
+
 
                     </div>
 

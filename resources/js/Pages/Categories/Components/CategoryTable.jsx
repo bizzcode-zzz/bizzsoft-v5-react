@@ -31,15 +31,14 @@ export default function CategoryTable({ categories }) {
 
                     <tr
                         key={category.id}
-                        className="border-t border-slate-100 transition hover:bg-blue-50/50"
+                        className="border-t border-slate-100 transition hover:bg-blue-50/50 dark:border-gray-700 dark:hover:bg-gray-700/50"
                     >
 
                         {/* Category Name */}
 
-                        <td className="w-full px-4 py-3 text-sm font-medium text-slate-700">
+                        <td className="w-full px-4 py-3 text-sm font-medium">
                             {category.category_name}
                         </td>
-
 
                         {/* Action */}
 

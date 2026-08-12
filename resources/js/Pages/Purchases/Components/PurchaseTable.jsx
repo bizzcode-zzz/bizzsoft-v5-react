@@ -42,7 +42,7 @@ export default function PurchaseTable({ purchases = [] }) {
                     <tr>
                         <td
                             colSpan="7"
-                            className="px-4 py-8 text-center text-sm text-slate-500"
+                            className="px-4 py-8 text-center text-sm"
                         >
                             No purchase transactions recorded.
                         </td>
@@ -60,19 +60,19 @@ export default function PurchaseTable({ purchases = [] }) {
 
                             <tr
                                 key={purchase.id}
-                                className="border-t border-slate-100 transition hover:bg-blue-50/50"
+                                className="border-t border-slate-100 transition hover:bg-blue-50/50 dark:border-gray-700 dark:hover:bg-gray-700/50"
                             >
 
                                 {/* Transaction ID */}
 
-                                <td className="w-[11%] whitespace-nowrap px-4 py-3 text-sm font-bold text-[#102a56]">
+                                <td className="w-[11%] whitespace-nowrap px-4 py-3 text-sm font-bold text-[#102a56] dark:text-blue-300">
                                     #PUR-{purchase.id}
                                 </td>
 
 
                                 {/* Product */}
 
-                                <td className="w-[18%] px-4 py-3 text-sm font-medium text-slate-700">
+                                <td className="w-[18%] px-4 py-3 text-sm font-medium">
                                     {purchase.product?.name ?? (
                                         <span className="italic text-red-500">
                                             Deleted Product
@@ -83,7 +83,7 @@ export default function PurchaseTable({ purchases = [] }) {
 
                                 {/* Supplier */}
 
-                                <td className="w-[18%] px-4 py-3 text-sm text-slate-600">
+                                <td className="w-[18%] px-4 py-3 text-sm">
                                     {purchase.supplier?.supplier_name ?? (
                                         <span className="italic text-red-500">
                                             Unknown Supplier
@@ -94,14 +94,14 @@ export default function PurchaseTable({ purchases = [] }) {
 
                                 {/* Quantity */}
 
-                                <td className="w-[12%] whitespace-nowrap px-4 py-3 text-center text-sm text-slate-600">
+                                <td className="w-[12%] whitespace-nowrap px-4 py-3 text-center text-sm">
                                     {purchase.quantity} units
                                 </td>
 
 
                                 {/* Cost Price */}
 
-                                <td className="w-[13%] whitespace-nowrap px-4 py-3 text-sm text-slate-600">
+                                <td className="w-[13%] whitespace-nowrap px-4 py-3 text-sm">
                                     ₱{Number(
                                         purchase.cost_price
                                     ).toFixed(2)}
@@ -110,7 +110,7 @@ export default function PurchaseTable({ purchases = [] }) {
 
                                 {/* Total Cost */}
 
-                                <td className="w-[13%] whitespace-nowrap px-4 py-3 text-sm font-bold text-green-600">
+                                <td className="w-[13%] whitespace-nowrap px-4 py-3 text-sm font-bold text-green-600 dark:text-green-400">
                                     ₱{totalCost.toFixed(2)}
                                 </td>
 

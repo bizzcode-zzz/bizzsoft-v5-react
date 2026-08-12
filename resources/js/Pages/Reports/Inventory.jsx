@@ -37,18 +37,18 @@ export default function Inventory({
         <AuthenticatedLayout
             header={
                 <div>
-                    <h2 className="text-2xl font-extrabold text-[#102a56]">
+                    <h2 className="text-2xl font-extrabold text-[#102a56] dark:text-blue-300">
                         Inventory Report
                     </h2>
 
-                    <p className="mt-1 text-sm text-slate-500">
+                    <p className="mt-1 text-sm text-slate-500 dark:text-gray-300">
                         View current inventory, stock levels, and product status.
                     </p>
                 </div>
             }
         >
 
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-sky-50 py-8">
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-sky-50 py-8 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
 
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
@@ -85,7 +85,7 @@ export default function Inventory({
 
                                 <div>
 
-                                    <label className="mb-1 block text-sm font-semibold text-slate-700">
+                                    <label className="mb-2 block text-sm font-semibold text-gray-700 dark:text-gray-200">
                                         Category
                                     </label>
 
@@ -95,17 +95,23 @@ export default function Inventory({
                                             w-full
                                             rounded-md
                                             border
-                                            border-slate-200
+                                            border-gray-300
                                             bg-white
                                             px-3
                                             py-2
                                             text-sm
-                                            text-slate-700
+                                            text-gray-900
                                             shadow-sm
-                                            focus:border-[#102a56]
-                                            focus:outline-none
-                                            focus:ring-1
-                                            focus:ring-[#102a56]
+                                            outline-none
+                                            transition
+                                            focus:border-green-600
+                                            focus:ring-2
+                                            focus:ring-green-600
+                                            dark:border-gray-600
+                                            dark:bg-gray-800
+                                            dark:text-white
+                                            dark:focus:border-green-500
+                                            dark:focus:ring-green-500
                                         "
                                         value={data.category}
                                         onChange={(e) =>
@@ -230,6 +236,8 @@ export default function Inventory({
                                             duration-150
                                             ease-in-out
                                             hover:bg-[#173b73]
+                                            dark:bg-blue-700
+                                            dark:hover:bg-blue-600
                                         "
                                     >
                                         {({ loading }) =>
@@ -256,7 +264,7 @@ export default function Inventory({
 
                         <Card title="📦 Total Products">
 
-                            <h3 className="text-2xl font-bold text-[#102a56]">
+                            <h3 className="text-2xl font-bold text-[#102a56] dark:text-blue-300">
                                 {totalProducts}
                             </h3>
 
@@ -265,7 +273,7 @@ export default function Inventory({
 
                         <Card title="📊 Total Stock">
 
-                            <h3 className="text-2xl font-bold text-blue-600">
+                            <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                                 {totalStock}
                             </h3>
 
@@ -274,7 +282,7 @@ export default function Inventory({
 
                         <Card title="⚠️ Low Stock">
 
-                            <h3 className="text-2xl font-bold text-amber-600">
+                            <h3 className="text-2xl font-bold text-amber-600 dark:text-amber-400">
                                 {lowStockProducts}
                             </h3>
 
@@ -283,7 +291,7 @@ export default function Inventory({
 
                         <Card title="🚨 Out of Stock">
 
-                            <h3 className="text-2xl font-bold text-red-600">
+                            <h3 className="text-2xl font-bold text-red-600 dark:text-red-400">
                                 {outOfStockProducts}
                             </h3>
 
@@ -318,7 +326,7 @@ export default function Inventory({
 
                                     <td
                                         colSpan="6"
-                                        className="px-4 py-8 text-center text-sm text-slate-500"
+                                        className="px-4 py-8 text-center text-sm"
                                     >
                                         No products found.
                                     </td>
@@ -331,13 +339,13 @@ export default function Inventory({
 
                                     let status = 'In Stock';
                                     let statusClass =
-                                        'text-green-600';
+                                        'text-green-600 dark:text-green-400';
 
                                     if (product.stock === 0) {
 
                                         status = 'Out of Stock';
                                         statusClass =
-                                            'text-red-600';
+                                            'text-red-600 dark:text-red-400';
 
                                     } else if (
                                         product.stock <=
@@ -346,7 +354,7 @@ export default function Inventory({
 
                                         status = 'Low Stock';
                                         statusClass =
-                                            'text-amber-600';
+                                            'text-amber-600 dark:text-amber-400';
 
                                     }
 
@@ -354,36 +362,48 @@ export default function Inventory({
 
                                         <tr
                                             key={product.id}
-                                            className="border-t border-slate-100 transition hover:bg-blue-50/50"
+                                            className="border-t border-slate-100 transition hover:bg-blue-50/50 dark:border-gray-700 dark:hover:bg-gray-700/50"
                                         >
 
-                                            <td className="w-[22%] px-4 py-3 text-sm font-semibold text-[#102a56]">
+                                            {/* Product */}
+
+                                            <td className="w-[22%] px-4 py-3 text-sm font-semibold text-[#102a56] dark:text-blue-300">
                                                 {product.name}
                                             </td>
 
 
-                                            <td className="w-[20%] px-4 py-3 text-sm text-slate-600">
+                                            {/* Category */}
+
+                                            <td className="w-[20%] px-4 py-3 text-sm">
                                                 {product.category?.category_name ??
                                                     'Uncategorized'}
                                             </td>
 
 
-                                            <td className="w-[15%] whitespace-nowrap px-4 py-3 text-sm text-slate-600">
+                                            {/* Price */}
+
+                                            <td className="w-[15%] whitespace-nowrap px-4 py-3 text-sm">
                                                 ₱{Number(
                                                     product.price
                                                 ).toFixed(2)}
                                             </td>
 
 
-                                            <td className="w-[13%] whitespace-nowrap px-4 py-3 text-sm font-bold text-slate-700">
+                                            {/* Stock */}
+
+                                            <td className="w-[13%] whitespace-nowrap px-4 py-3 text-sm font-bold">
                                                 {product.stock}
                                             </td>
 
 
-                                            <td className="w-[15%] whitespace-nowrap px-4 py-3 text-sm text-slate-600">
+                                            {/* Reorder Level */}
+
+                                            <td className="w-[15%] whitespace-nowrap px-4 py-3 text-sm">
                                                 {product.reorder_level}
                                             </td>
 
+
+                                            {/* Status */}
 
                                             <td
                                                 className={`w-[15%] whitespace-nowrap px-4 py-3 text-sm font-bold ${statusClass}`}
@@ -434,8 +454,8 @@ export default function Inventory({
                                                     transition
                                                     ${
                                                         link.active
-                                                            ? 'border-[#102a56] bg-[#102a56] text-white'
-                                                            : 'border-slate-200 bg-white text-slate-600 hover:bg-blue-50 hover:text-[#102a56]'
+                                                            ? 'border-[#102a56] bg-[#102a56] text-white dark:border-blue-600 dark:bg-blue-600'
+                                                            : 'border-slate-200 bg-white text-slate-600 hover:bg-blue-50 hover:text-[#102a56] dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-blue-300'
                                                     }
                                                     ${
                                                         !link.url

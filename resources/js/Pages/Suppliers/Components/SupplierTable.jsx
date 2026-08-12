@@ -39,7 +39,7 @@ export default function SupplierTable({ suppliers }) {
                     <tr>
                         <td
                             colSpan="6"
-                            className="px-4 py-8 text-center text-sm text-slate-500"
+                            className="px-4 py-8 text-center text-sm"
                         >
                             No suppliers found.
                         </td>
@@ -51,21 +51,21 @@ export default function SupplierTable({ suppliers }) {
 
                         <tr
                             key={supplier.id}
-                            className="border-t border-slate-100 transition hover:bg-blue-50/50"
+                            className="border-t border-slate-100 transition hover:bg-blue-50/50 dark:border-gray-700 dark:hover:bg-gray-700/50"
                         >
 
                             {/* Supplier Name */}
 
-                            <td className="w-[18%] px-4 py-3 text-sm font-medium text-slate-700">
+                            <td className="w-[18%] px-4 py-3 text-sm font-medium">
                                 {supplier.supplier_name}
                             </td>
 
 
                             {/* Contact Person */}
 
-                            <td className="w-[17%] px-4 py-3 text-sm text-slate-600">
+                            <td className="w-[17%] px-4 py-3 text-sm">
                                 {supplier.contact_person || (
-                                    <span className="italic text-slate-400">
+                                    <span className="italic text-slate-400 dark:text-gray-500">
                                         N/A
                                     </span>
                                 )}
@@ -74,9 +74,9 @@ export default function SupplierTable({ suppliers }) {
 
                             {/* Phone */}
 
-                            <td className="w-[14%] whitespace-nowrap px-4 py-3 text-sm text-slate-600">
+                            <td className="w-[14%] whitespace-nowrap px-4 py-3 text-sm">
                                 {supplier.phone_number || (
-                                    <span className="italic text-slate-400">
+                                    <span className="italic text-slate-400 dark:text-gray-500">
                                         N/A
                                     </span>
                                 )}
@@ -85,9 +85,9 @@ export default function SupplierTable({ suppliers }) {
 
                             {/* Email */}
 
-                            <td className="w-[18%] px-4 py-3 text-sm text-slate-600">
+                            <td className="w-[18%] px-4 py-3 text-sm">
                                 {supplier.email || (
-                                    <span className="italic text-slate-400">
+                                    <span className="italic text-slate-400 dark:text-gray-500">
                                         N/A
                                     </span>
                                 )}
@@ -96,9 +96,9 @@ export default function SupplierTable({ suppliers }) {
 
                             {/* Address */}
 
-                            <td className="w-[17%] px-4 py-3 text-sm text-slate-600">
+                            <td className="w-[17%] px-4 py-3 text-sm">
                                 {supplier.address || (
-                                    <span className="italic text-slate-400">
+                                    <span className="italic text-slate-400 dark:text-gray-500">
                                         No address
                                     </span>
                                 )}

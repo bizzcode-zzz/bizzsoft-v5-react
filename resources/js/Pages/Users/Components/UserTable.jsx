@@ -46,7 +46,7 @@ export default function UserTable({ users = [] }) {
                     <tr>
                         <td
                             colSpan="5"
-                            className="px-4 py-8 text-center text-sm text-slate-500"
+                            className="px-4 py-8 text-center text-sm"
                         >
                             No users found.
                         </td>
@@ -58,26 +58,26 @@ export default function UserTable({ users = [] }) {
 
                         <tr
                             key={user.id}
-                            className="border-t border-slate-100 transition hover:bg-blue-50/50"
+                            className="border-t border-slate-100 transition hover:bg-blue-50/50 dark:border-gray-700 dark:hover:bg-gray-700/50"
                         >
 
                             {/* Name */}
 
-                            <td className="w-[18%] px-4 py-3 text-sm font-semibold text-slate-700">
+                            <td className="w-[18%] px-4 py-3 text-sm font-semibold">
                                 {user.name}
                             </td>
 
 
                             {/* Email */}
 
-                            <td className="w-[22%] px-4 py-3 text-sm text-slate-600">
+                            <td className="w-[22%] px-4 py-3 text-sm">
                                 {user.email}
                             </td>
 
 
                             {/* Role */}
 
-                            <td className="w-[12%] px-4 py-3 text-sm font-medium text-slate-600">
+                            <td className="w-[12%] px-4 py-3 text-sm font-medium">
                                 {user.role?.name ?? 'No Role'}
                             </td>
 
@@ -88,13 +88,13 @@ export default function UserTable({ users = [] }) {
 
                                 {user.status ? (
 
-                                    <span className="inline-flex rounded-full border border-green-200 bg-green-50 px-2.5 py-1 text-xs font-semibold text-green-700">
+                                    <span className="inline-flex rounded-full border border-green-200 bg-green-50 px-2.5 py-1 text-xs font-semibold text-green-700 dark:border-green-800 dark:bg-green-900/40 dark:text-green-300">
                                         Active
                                     </span>
 
                                 ) : (
 
-                                    <span className="inline-flex rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-500">
+                                    <span className="inline-flex rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300">
                                         Inactive
                                     </span>
 

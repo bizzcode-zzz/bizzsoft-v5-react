@@ -1,8 +1,9 @@
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import ThemeToggle from '@/Components/BizzSoft/ThemeToggle';
 import { Link, usePage } from '@inertiajs/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
@@ -10,14 +11,23 @@ export default function AuthenticatedLayout({ header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
+    const [darkMode, setDarkMode] = useState(() => {
+        return localStorage.getItem('theme') === 'dark';
+    });
+
+    useEffect(() => {
+        document.documentElement.classList.toggle('dark', darkMode);
+        localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+    }, [darkMode]);
+
     return (
-        <div className="min-h-screen bg-slate-50 text-slate-800">
+        <div className="min-h-screen bg-slate-50 text-slate-800 dark:bg-gray-900 dark:text-gray-100">
 
             {/* =====================================================
                 NAVBAR
             ====================================================== */}
 
-            <nav className="border-b border-slate-200 bg-white shadow-sm">
+            <nav className="border-b border-slate-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-900">
 
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
@@ -69,13 +79,13 @@ export default function AuthenticatedLayout({ header, children }) {
 
                                     <div className="hidden sm:block">
 
-                                        <div className="text-xl font-extrabold tracking-tight text-[#102a56]">
+                                        <div className="text-xl font-extrabold tracking-tight text-[#102a56] dark:text-white">
                                             Bizz<span className="text-blue-600">
                                                 Soft
                                             </span>
                                         </div>
 
-                                        <div className="text-[8px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+                                        <div className="text-[8px] font-semibold uppercase tracking-[0.16em] text-slate-400 dark:text-gray-500">
                                             Inventory Management
                                         </div>
 
@@ -162,6 +172,8 @@ export default function AuthenticatedLayout({ header, children }) {
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
 
+                            <ThemeToggle />
+
                             <div className="relative ms-3">
 
                                 <Dropdown>
@@ -170,7 +182,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
                                         <button
                                             type="button"
-                                            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-600 shadow-sm transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 focus:outline-none"
+                                            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-600 shadow-sm transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-gray-500 dark:hover:bg-gray-700 dark:hover:text-white"
                                         >
 
                                             <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">
@@ -235,7 +247,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                             !previousState
                                     )
                                 }
-                                className="inline-flex items-center justify-center rounded-xl p-2.5 text-slate-500 transition hover:bg-blue-50 hover:text-blue-600 focus:outline-none"
+                                className="inline-flex items-center justify-center rounded-xl p-2.5 text-slate-500 transition hover:bg-blue-50 hover:text-blue-600 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-blue-400"
                             >
 
                                 <svg
@@ -289,7 +301,7 @@ export default function AuthenticatedLayout({ header, children }) {
                         (showingNavigationDropdown
                             ? 'block'
                             : 'hidden') +
-                        ' border-t border-slate-100 bg-white shadow-sm sm:hidden'
+                        ' border-t border-slate-100 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-900 sm:hidden'
                     }
                 >
 
@@ -363,21 +375,21 @@ export default function AuthenticatedLayout({ header, children }) {
 
                     {/* Mobile User */}
 
-                    <div className="border-t border-slate-100 bg-slate-50 px-4 pb-4 pt-4">
+                    <div className="border-t border-slate-100 bg-slate-50 px-4 pb-4 pt-4 dark:border-gray-700 dark:bg-gray-800">
 
                         <div className="flex items-center gap-3">
 
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 font-bold text-blue-700">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 font-bold text-blue-700 dark:bg-blue-900 dark:text-blue-200">
                                 {user.name?.charAt(0)?.toUpperCase()}
                             </div>
 
                             <div>
 
-                                <div className="font-semibold text-[#102a56]">
+                                <div className="font-semibold text-[#102a56] dark:text-white">
                                     {user.name}
                                 </div>
 
-                                <div className="text-sm text-slate-500">
+                                <div className="text-sm text-slate-500 dark:text-gray-400">
                                     {user.email}
                                 </div>
 
@@ -385,6 +397,9 @@ export default function AuthenticatedLayout({ header, children }) {
 
                         </div>
 
+                        {/* MOBILE THEME TOGGLE */}
+
+                        <ThemeToggle showLabel />
 
                         <div className="mt-4 space-y-1">
 
@@ -417,7 +432,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
             {header && (
 
-                <header className="border-b border-slate-200 bg-white">
+                <header className="border-b border-slate-200 bg-white dark:border-gray-700 dark:bg-gray-900">
 
                     <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
 

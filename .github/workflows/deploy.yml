@@ -30,8 +30,8 @@ jobs:
       - name: Build React Application
         run: npm run build
 
-      # 5. Make sure the build directory exists on Hostinger
-      - name: Prepare Hostinger Build Directory
+      # 5. Make sure both V5 build directories exist on Hostinger
+      - name: Prepare V5 Build Directories
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 145.79.28.207
@@ -40,9 +40,10 @@ jobs:
           port: 65002
           script: |
             mkdir -p /home/u180948312/laravel_v5/public/build
+            mkdir -p /home/u180948312/domains/bizzsoft.dev/public_html/build
 
-      # 6. Upload the generated React/Vite build
-      - name: Upload React Build
+      # 6. Upload React build to Laravel V5 public directory
+      - name: Upload React Build to Laravel V5
         uses: appleboy/scp-action@v0.1.7
         with:
           host: 145.79.28.207
@@ -52,7 +53,18 @@ jobs:
           source: "public/build/*"
           target: "/home/u180948312/laravel_v5/public/build"
 
-      # 7. Deploy Laravel application
+      # 7. Upload React build to the live web root
+      - name: Upload React Build to Public HTML
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 145.79.28.207
+          username: u180948312
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 65002
+          source: "public/build/*"
+          target: "/home/u180948312/domains/bizzsoft.dev/public_html/build"
+
+      # 8. Deploy Laravel application
       - name: Deploy Laravel Application
         uses: appleboy/ssh-action@v1.0.3
         with:
